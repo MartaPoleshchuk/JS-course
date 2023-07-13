@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anketa</title>
+</head>
+<body>
+    <script>
+        const surname=prompt('Введите вашу фамилию');
+        const name=prompt('Введите ваше имя');
+        const patronymic=prompt('Введите ваше отчество');
+        const age=parseInt(prompt('Введите ваш возраст'));
+        let gender=confirm('Ваш пол мужской?\nЕсли да - ОК, если женский - Отмена');
+        let retiree;
+
+     
+        if (gender==true){ 
+                gender="мужской";
+                if (age>=63)
+                    retiree="да"
+                else retiree="нет";
+
+        }
+        else gender="женский";
+        
+        if (gender=="женский" && age>=58) 
+            retiree="да"
+        else retiree="нет";
+                
+        const anketa = `
+        ваше ФИО: ${surname} ${name} ${patronymic}
+        ваш возраст в годах: ${age} 
+        ваш возраст в днях:  ${age*365}
+        через 5 лет вам будет: ${age+5}
+        ваш пол: ${gender}
+        вы на пенсии: ${retiree}
+        `
+       
+        alert(anketa);
+
+    </script>
+</body>
+</html>
