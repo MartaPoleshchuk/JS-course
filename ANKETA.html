@@ -37,21 +37,24 @@
 
         let gender=confirm('Ваш пол мужской?\nЕсли да - ОК, если женский - Отмена');
         let retiree;
+        
+        if (gender == true && age >= 63 || gender == false && age >= 58) {
+            retiree = "да";
+        }
+        
+        else {
+            retiree = "нет";
+        }
+       
+       
+        if (gender == true) {
+            gender="мужской";
+        }
+        else {
+            gender = "женский";
+        }
 
      
-        if (gender==true){ 
-                gender="мужской";
-                if (age>=63)
-                    retiree="да"
-                else retiree="нет";
-
-        }
-        else gender="женский";
-        
-        if (gender=="женский" && age>=58) 
-            retiree="да"
-        else retiree="нет";
-                
         const anketa = `
         ваше ФИО: ${surname} ${name} ${patronymic}
         ваш возраст в годах: ${age} 
@@ -62,7 +65,9 @@
         `
        
         alert(anketa);
+        
 
     </script>
+
 </body>
 </html>
