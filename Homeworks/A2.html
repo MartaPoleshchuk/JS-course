@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const str = prompt('Введите строку');
+
+        function spaceDelete(str) {
+            let strStart = 0;
+            let strEnd = str.length;
+            let result = "";
+
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] !== ' ') {
+
+                    strStart = i;
+                    break;
+                }
+            }
+
+
+            for (i = str.length - 1; i > 0; i--) {
+
+                if (str[i] !== ' ') {
+                    strEnd = i;
+                    break;
+                }
+            }
+
+            result = str.substring(strStart, strEnd + 1);
+
+            console.log('_', result, '_');
+
+            return result;
+
+        }
+
+        spaceDelete(str);
+
+    </script>
+</body>
+
+</html>

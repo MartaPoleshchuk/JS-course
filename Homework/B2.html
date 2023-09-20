@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const str = prompt('Введите строку');
+
+        function turnString(str) {
+
+            let turnstr = str.split('');
+
+            //turnedstr = turnstr.reverse(); - альтернативный вариант
+
+            let s = [];
+            for (i = 0; i < turnstr.length; i++) {
+
+                s[i] = turnstr[(turnstr.length - 1) - i]
+
+            }
+            turnstr = s.join(['']);
+
+            return turnstr;
+        }
+        turnString(str);
+
+    </script>
+</body>
+
+</html>
