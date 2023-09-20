@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const f = ' afffa'
+
+        function palindromRecursion(f) {
+
+            let f1 = '';
+
+            f1 = f.trim().toLowerCase().split('');
+
+            function change(char) {
+
+                const dict = {
+                    "ё": "е",
+                    "ъ": "ь",
+                    " ": "",
+                    ",": "",
+                    ".": "",
+                    "!": "",
+                    ":": "",
+                    ";": "",
+                    "'": "",
+                    "-": "",
+                    "(": "",
+                    ")": ""
+                };
+
+                if (char in dict) {
+                    return dict[char];
+                }
+                return char;
+            }
+           
+            let f1clear = '';
+
+            for (let x of f1) {
+
+                f1clear += change(x);
+
+            }
+
+                  
+            if (f1clear.length <= 1 ) {
+                return console.log ('Это палиндром')
+            }
+            else {
+                let f1clearSliced;
+
+                if (f1clear[0] === f1clear[f1clear.length -1]) {
+
+                    f1clearSliced= f1clear.slice(1,-1);
+
+                    return palindromRecursion (f1clearSliced);
+
+                }
+                else {
+                    return console.log ('Это не палиндром')
+                }
+            
+            }
+
+        }
+
+        palindromRecursion(f);
+
+    </script>
+</body>
+</html>
