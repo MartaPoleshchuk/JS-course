@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const f = prompt('Введите строку')
+
+        function palindrom(f) {
+
+            let f1 = '';
+
+            f1 = f.trim().toLowerCase().split('');
+
+            function change(char) {
+
+                const dict = {
+                    "ё": "е",
+                    "ъ": "ь",
+                    " ": "",
+                    ",": "",
+                    ".": "",
+                    "!": "",
+                    ":": "",
+                    ";": "",
+                    "'": "",
+                    "-": "",
+                    "(": "",
+                    ")": ""
+                };
+
+                if (char in dict) {
+                    return dict[char];
+                }
+                return char;
+            }
+           
+            let f1clear = '';
+
+            for (let x of f1) {
+
+                f1clear += change(x);
+
+            }
+
+            for (let i = 0; i < f1clear.length / 2; i++) {
+
+                if (f1clear[i] !== f1clear[f1clear.length - 1 - i]) {
+
+                    console.log ('Это не палиндром');
+                    return;
+
+                }
+                                
+            }
+            console.log ('Это палиндром')
+        }
+
+        palindrom(f);
+
+    </script>
+</body>
+
+</html>
