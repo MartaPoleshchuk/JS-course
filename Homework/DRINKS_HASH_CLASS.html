@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id='add'>Ввод информации о напитке</button> </br></br>
+    <button id='get'>Получение информации о напитке</button> </br></br>
+    <button id='deleteInfo'>Удаление информации о напитке</button> </br></br>
+    <button id='list'>Перечень всех напитков</button>
+    <script>
+        'use strict';
+        
+        class HashStorageClass {
+                    
+            constructor(){
+                this.storage = {};
+            } 
+            
+            addValue (key,value) {
+                
+               this.storage[key]  = value;
+                                                         
+            }
+
+            getValue (key) {
+                return this.storage[key];
+              
+            } 
+
+            deleteValue(key){
+                
+                if (key in this.storage) {
+                    
+                    delete this.storage[key];
+                    return true;
+                }
+                else return false;
+
+            }
+
+            getKeys (){
+                return Object.keys(this.storage);
+            }
+     
+           
+        }
+
+
+        const drinkStorage = new HashStorageClass();
+
+     
+        drinkStorage.addValue('Маргарита', {alcohol: 'Да', recipe: 'рецепт Маргариты'})
+        drinkStorage.addValue('Чай', {alcohol:'Нет', recipe:'рецепт Чая'})
+        drinkStorage.addValue('1', {alcohol: 'Да', recipe: '2'})
+
+        const add = document.getElementById('add');
+                       
+        add.onclick = function () {
+
+            const name = prompt ('Введите название напитка');
+            let alcohol = confirm ('Алкогольный или нет');
+            const recipe = prompt ('Введите рецепт');
+                       
+            if (alcohol) {
+                alcohol = 'Да';
+            }
+            else {alcohol = "Нет";}
+            
+            let info = {};
+            info.alcohol = alcohol;
+            info.recipe = recipe;
+                     
+            drinkStorage.addValue(name, info)
+                        
+        }
+
+       
+        const get = document.getElementById('get');
+        get.onclick = function () {
+
+            const getName = prompt('Введите напиток, о котором нужна информация')
+                      
+            const getInfo = drinkStorage.getValue(getName)
+
+            if (getName==true){
+            console.log(`
+            'напиток:' ${getName}
+            'алкогольный:' ${getInfo.alcohol}
+            'рецепт:'  ${getInfo.recipe}`)
+            }
+            else {
+               alert ('Такого напитка нет!')
+            }
+
+        }
+
+        const deleteInfo = document.getElementById('deleteInfo');
+        deleteInfo.onclick = function () {
+
+            const deleteName = prompt('Введите напиток, который нужно удалить')
+            
+            const deleteAction = drinkStorage.deleteValue(deleteName)
+           
+            if (deleteAction == true){
+                alert('Напиток удален!')
+            }
+            else {
+               alert ('Такого напитка нет!')
+            }
+
+        }
+
+        const list = document.getElementById('list');
+              
+        list.onclick = function () {
+            const listName = drinkStorage.getKeys();
+            alert (listName)
+        }
+    </script>
+</body>
+</html>
