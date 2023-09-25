@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #i {
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+         #sq {
+            width: 80px;
+            height: 80px;
+            background-color: red;
+
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="i">
+        <div id="sq"></div>
+    </div>
+    
+    
+    <script>
+
+        let sq = document.getElementById("sq");
+        let x = 10;
+        let y = 10;
+        let timer=0;
+        sq.style.left = x +"px";
+        sq.style.top = y +"px";
+        let sqx = sq.offsetLeft;    
+        let sqy = sq.offsetTop; 
+
+        
+        function tick37(){
+            sq.style.left = (x -=10) + "px";
+        
+            // if (sq.style.left = 0 + "px" ) {
+            //     clearInterval(timer);
+            //     console.log('border')
+            // } 
+        }
+                   
+        function tick38(){
+             
+            sq.style.top = (y -= 10) + "px";
+
+            // if (sq.style.top = 0 + "px") {
+            //     clearInterval(timer);
+            //     console.log ('borderTop');
+            // }
+        
+        }
+        function tick39() {
+                       
+            sq.style.left = (x +=10) + "px";
+
+            if (sq.offsetLeft >= 400) {
+                sq.style.left = (x -=10) + "px";
+
+                console.log('-111-');
+            }
+        }
+
+        function tick40() {
+           
+            sq.style.top = (y += 10) + "px";
+        }
+      
+            
+        window.addEventListener('keydown', (e) => {
+           
+            switch(e.keyCode){
+
+                // case 37: sq.style.left = (x -=10) + "px"; break;  
+                
+                case 37: if (timer) {
+                    clearInterval(timer);
+                    timer=0;
+                     } timer=setInterval(tick37,100); break;
+
+                // case 38: sq.style.top = (y -= 10) + "px"; break;
+
+                case 38: if (timer) {
+                    clearInterval(timer);
+                    timer=0;
+                     } timer=setInterval(tick38,100); break;
+                // case 39: sq.style.left = (x +=10) + "px"; break;
+               
+                case 39: if (timer) {
+                    clearInterval(timer);
+                    timer=0;
+                     } timer=setInterval(tick39,100); break;
+
+                // case 40: sq.style.top = (y += 10) + "px"; break;
+                case 40: if (timer) {
+                    clearInterval(timer);
+                    //timer=0;
+                     } timer=setInterval(tick40,100); break;
+            }
+
+                
+           
+            // if (sqx >= 400) {
+            //    //sq.style.left = (x -=10) + "px";
+            //     //setInterval(tick37,100)
+
+            // }
+            if (sqx <= 0) {
+                
+                sq.style.left = (x +=10) + "px";
+                
+
+            }
+            
+            if (sqy >=  400) {
+                sq.style.top = (y -=10) + "px";
+
+            }
+
+            if (sqy <=  0) {
+                sq.style.top = (y +=10) + "px";
+
+            }
+
+
+
+        })
+
+
+
+   
+    </script>
+
+
+</body>
+</html>

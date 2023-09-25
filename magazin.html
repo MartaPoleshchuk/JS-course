@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Document</title>
+
+    <style>
+        #app {
+            width: 592px;
+            display: flex;
+            margin: 0 auto;
+            justify-content: space-between;
+            flex-flow: wrap;
+        }
+        .card{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+        <div id="app"></div>
+        <p>Введите данные продукта:</p>
+
+    <input type="text" name="brand" placeholder="Бренд"><br><br>
+    <input type="text" name="model" placeholder="Модель"><br><br>
+    <input type="text" name="price" placeholder="Цена"><br><br>
+    <input type="button" value="add" onclick = "add()"><br><br>
+    <input type="range" name="filter" min="0" max="1000" step="10"><br><br>
+    <input type="button" value="Фильтр по цене" onclick = "filter()"><br><br>
+    
+
+<script>
+
+let cars = [];
+
+let add =() => {
+    let brand = document.querySelector("[name='brand']").value;
+    let model = document.querySelector("[name='model']").value;
+    //let image = document.querySelector("[name='image']").value;
+   // let descr = document.querySelector("[name='descr']").value;
+    let price = document.querySelector("[name='price']").value;
+
+    cars.push ({
+        brand, model,  price
+    })
+    //console.log(items);
+
+    render(cars);
+    //console.log ("---items", items)
+}
+const app = document.getElementById("app");
+
+let filteredItems=[];
+
+function render (items) {
+    
+        const html = items.reduce((acc, item) => {
+            return acc += `
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${item.brand}</h5>
+                    <p class="card-text">${item.model}</p>
+                    <p class="card-text">${item.price +" BYN"}</p>
+                    <a href="#" class="btn btn-primary">Купить</a>
+                </div>
+            </div>`
+        }, "");
+
+       // console.log(html)
+
+        app.innerHTML = html;
+
+    }
+
+function filter () {
+    let f = document.querySelector("[name='filter']").value; 
+
+    filteredItems = cars.filter(car =>car.price < f);
+
+   // console.log('----', filteredItems);
+   
+    render(filteredItems);
+     
+}
+
+
+</script>
+</body>
+
+</html>
