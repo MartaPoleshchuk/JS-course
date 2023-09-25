@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        function buildWrapper(tag) {
+
+            return function (text, obj) {
+
+                let textNew = text.split('')
+                textNew = textNew.map(symbols)
+                textNew = textNew.join("");
+                let key;
+                let value;
+                let objToScreen = [];
+
+                function symbols(char) {
+                    const dict = {
+                        "&": "&amp;",
+                        "'": "&apos;",
+                        '"': "&quot;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                    };
+                    if (char in dict) {
+                        return dict[char];
+                    }
+                    return char;
+                }
+
+                if (obj) {
+
+                    for ([key, value] of Object.entries(obj)) {
+
+                        obj = ` ${key}="${value}"`
+                        objToScreen.push(obj)
+                        
+                    }
+                }
+                else { objToScreen = '' }
+
+                return `<${tag}${objToScreen}>${textNew}</${tag}>`;
+            }
+        }
+
+        const wrapH1 = buildWrapper('H1');
+        const wrapP = buildWrapper('P');
+
+        console.log(wrapP("Однажды в студёную зимнюю пору"));
+        console.log(wrapP("Однажды в студёную зимнюю пору", { lang: "ru" }));
+        console.log(wrapP("Однажды в <студёную> зимнюю пору"));
+        console.log(wrapP("Вкусные M&M's"));
+        console.log(wrapH1("СТИХИ", { align: "center", title: "M&M's" }));
+    </script>
+</body>
+
+</html>
