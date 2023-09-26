@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //const str = prompt('Введите строку')
+        const str = 'Привет';
+        const vowels = ['а', 'я', 'у', 'ю', 'о', 'е', 'ё', 'э', 'и', 'ы'];
+        const strArr = str.toLowerCase().split('');
+
+        function fForEach(strArr) {
+
+            let count = 0;
+            strArr.forEach((strArr) => vowels.includes(strArr) ? count++ : count)
+            return count;
+
+        }
+        console.log('forEach', fForEach(strArr));
+        
+        function fFilter(strArr) {
+
+            let count = 0;
+            count = strArr.filter((strArr) => vowels.includes(strArr)).length;
+            return count;
+
+        }
+        console.log('filter', fFilter(strArr))
+
+        function fReduce(strArr) {
+
+            let count = 0;
+            count = strArr.reduce((acc, val) => vowels.includes(val) ? acc + 1 : acc, 0);
+            return count;
+
+        }
+        console.log('reduce', fReduce(strArr))
+
+
+    </script>
+</body>
+
+</html>
