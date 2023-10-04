@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <form action="https://fe.it-academy.by/TestForm.php" name="form" ></form>
+    <br><br><br>
+
+    <script>
+
+
+
+        const formDef1 =
+            [
+                { label: 'Название сайта:', kind: 'longtext', name: 'sitename' },
+                { label: 'URL сайта:', kind: 'longtext', name: 'siteurl' },
+                { label: 'Посетителей в сутки:', kind: 'number', name: 'visitors' },
+                { label: 'E-mail для связи:', kind: 'shorttext', name: 'email' },
+                {
+                    label: 'Рубрика каталога:', kind: 'combo', name: 'division',
+                    variants: [{ text: 'здоровье', value: 1 }, { text: 'домашний уют', value: 2 }, { text: 'бытовая техника', value: 3 }]
+                },
+                {
+                    label: 'Размещение:', kind: 'radio', name: 'payment',
+                    variants: [{ text: 'бесплатное', value: 1 }, { text: 'платное', value: 2 }, { text: 'VIP', value: 3 }]
+                },
+                { label: 'Разрешить отзывы:', kind: 'check', name: 'votes' },
+                { label: 'Описание сайта:', kind: 'memo', name: 'description' },
+                { caption: 'Опубликовать', kind: 'submit' },
+            ];
+
+        const formDef2 =
+            [
+                { label: 'Фамилия:', kind: 'longtext', name: 'lastname' },
+                { label: 'Имя:', kind: 'longtext', name: 'firstname' },
+                { label: 'Отчество:', kind: 'longtext', name: 'secondname' },
+                { label: 'Возраст:', kind: 'number', name: 'age' },
+                { caption: 'Зарегистрироваться', kind: 'submit' },
+            ];
+
+
+        function formBuilder(arr) {
+
+            const form = document.forms.form;
+           
+            arr.forEach(elem => {
+
+                let text = elem.label;
+                let textCreate = document.createTextNode(text);
+                let inputCreate = document.createElement('input');
+                    inputCreate.name = elem.name;
+                let brCreate = document.createElement('br');
+                let selectCreate = document.createElement('select');
+
+                form.appendChild(textCreate);
+                form.appendChild(inputCreate);
+                form.appendChild(brCreate);
+
+                //*switch case как альтернативный вариант
+
+                if (elem.kind == 'longtext') {
+                    inputCreate.type = 'text';
+                    inputCreate.style = 'width: 400px';
+                }
+
+                if (elem.kind == 'number') {
+                    inputCreate.type = 'number';
+                    inputCreate.style = 'width:53px';
+                }
+
+                if (elem.kind == 'shorttext') {
+                    inputCreate.type = 'email';
+                    inputCreate.style = 'width:60px';
+                }
+
+                if (elem.kind == 'combo') {
+                    form.replaceChild(selectCreate, inputCreate)
+                    elem.variants.forEach(elem => {
+                        let optionCreate = document.createElement('option');
+                        optionCreate.textContent = elem.text;
+                        optionCreate.value = elem.value;
+                        optionCreate.selected = '3';
+                        selectCreate.appendChild(optionCreate)
+                    })
+                }
+                if (elem.kind == 'radio') {
+                    form.removeChild(inputCreate)
+                    form.removeChild(brCreate)
+                    elem.variants.forEach(elem => {
+                        let radioCreate = document.createElement('input')
+                            radioCreate.type = 'radio';
+                            radioCreate.name = elem.name;
+                            
+                        let radioSpanCreate = document.createElement('span')
+                            radioSpanCreate.textContent = elem.text;
+                            radioSpanCreate.value = elem.value;
+                            
+                        form.appendChild(radioCreate);
+                        form.appendChild(radioSpanCreate);                        
+                    })
+                    form.appendChild(brCreate)
+                }
+
+                if (elem.kind == 'check') {
+                    inputCreate.type = 'checkbox';
+                }
+
+                if (elem.kind == 'memo') {
+
+                    let memoCreate = document.createElement('textarea')
+                    form.insertBefore(brCreate, inputCreate)
+                    form.replaceChild(memoCreate, inputCreate)
+                    memoCreate.rows = '5';
+                    memoCreate.cols = '60';
+                }
+
+                if (elem.kind == 'submit') {
+                    form.removeChild(textCreate)
+                    inputCreate.type = 'submit';
+                    inputCreate.value = elem.caption;
+                    form.insertBefore(brCreate, inputCreate)
+                    form.appendChild(document.createElement('hr'))
+                }
+            })
+        }
+
+        formBuilder(formDef1);
+        formBuilder(formDef2);
+    </script>
+
+</body>
+
+</html>
